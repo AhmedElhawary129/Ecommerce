@@ -1,0 +1,1188 @@
+{
+	"info": {
+		"_postman_id": "41de10f8-3963-4638-a40e-5d70ec51d7a8",
+		"name": "Ecommerce",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "39387372"
+	},
+	"item": [
+		{
+			"name": "users",
+			"item": [
+				{
+					"name": "signUp",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"firstName\":\"Ahmed\",\r\n    \"lastName\":\"Elhawary\",\r\n    \"email\": \"user1@gmail.com\",\r\n    \"password\": \"user1@12345\",\r\n    \"confirmPassword\": \"User@12345\",\r\n    \"DOB\": \"2003-09-12\",\r\n    \"gender\": \"male\",\r\n    \"phone\": \"01234567890\",\r\n    \"address\": \"Tanta\",\r\n    \"role\": \"admin\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:3000/users/signUp",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"users",
+								"signUp"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "confirmEmail",
+					"request": {
+						"method": "PATCH",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"email\": \"user1@gmail.com\",\r\n    \"otp\": \"101763\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:3000/users/confirmEmail",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"users",
+								"confirmEmail"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "signIn",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"email\": \"user1@gmail.com\",\r\n    \"password\": \"User@12345\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:3000/users/signIn",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"users",
+								"signIn"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "categories",
+			"item": [
+				{
+					"name": "createCategory",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6Ild3dy53b3JrMTI5QGdtYWlsLmNvbSIsImlkIjoiNjhjY2U1ZmNmMTVhMWM2YTUyOGI0MWIxIiwiaWF0IjoxNzU4MjU4NzkxLCJleHAiOjE3NTgzNDUxOTF9.NFkC225uEiIehIWQUM5ko_zBGy9YCQpnJCkeX62wHio",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "formdata",
+							"formdata": [
+								{
+									"key": "name",
+									"value": "category two",
+									"type": "text"
+								},
+								{
+									"key": "mainImage",
+									"type": "file",
+									"src": "/G:/Ahmed/صور معدلة/download.jpeg"
+								}
+							]
+						},
+						"url": {
+							"raw": "http://localhost:3000/categories/create",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"categories",
+								"create"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "updateCategory",
+					"request": {
+						"method": "PATCH",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6Ild3dy53b3JrMTI5QGdtYWlsLmNvbSIsImlkIjoiNjhjY2U1ZmNmMTVhMWM2YTUyOGI0MWIxIiwiaWF0IjoxNzU4MjU4NzkxLCJleHAiOjE3NTgzNDUxOTF9.NFkC225uEiIehIWQUM5ko_zBGy9YCQpnJCkeX62wHio",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "formdata",
+							"formdata": [
+								{
+									"key": "name",
+									"value": "category two updated",
+									"type": "text",
+									"disabled": true
+								},
+								{
+									"key": "mainImage",
+									"type": "file",
+									"src": "/G:/Ahmed/صور معدلة/images.jpeg"
+								}
+							]
+						},
+						"url": {
+							"raw": "http://localhost:3000/categories/update/68cce6b6fc4d67f1223d7c15",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"categories",
+								"update",
+								"68cce6b6fc4d67f1223d7c15"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "deleteCategory",
+					"request": {
+						"method": "DELETE",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6ImFobWVkbWVkb28xMjkzQGdtYWlsLmNvbSIsImlkIjoiNjhjMTMyNDk2ODI1NjAxZjljZjc0ZTJhIiwiaWF0IjoxNzU3OTc2ODU0LCJleHAiOjE3NTgwNjMyNTR9.429_zypdPUVwTsXSoR_ms3bWRcgDqHBM-sedPVy14TE",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "formdata",
+							"formdata": []
+						},
+						"url": {
+							"raw": "http://localhost:3000/categories/delete/68c8c16b44ae0659989f1ff1",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"categories",
+								"delete",
+								"68c8c16b44ae0659989f1ff1"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "getAllCategories",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "formdata",
+							"formdata": []
+						},
+						"url": {
+							"raw": "http://localhost:3000/categories",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"categories"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "subCategories",
+			"item": [
+				{
+					"name": "createSubCategory",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6Ild3dy53b3JrMTI5QGdtYWlsLmNvbSIsImlkIjoiNjhjY2U1ZmNmMTVhMWM2YTUyOGI0MWIxIiwiaWF0IjoxNzU4MjU4NzkxLCJleHAiOjE3NTgzNDUxOTF9.NFkC225uEiIehIWQUM5ko_zBGy9YCQpnJCkeX62wHio",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "formdata",
+							"formdata": [
+								{
+									"key": "name",
+									"value": "sub category two",
+									"type": "text"
+								},
+								{
+									"key": "mainImage",
+									"type": "file",
+									"src": "/G:/Ahmed/صور معدلة/images1.jpeg"
+								},
+								{
+									"key": "category",
+									"value": "68cce6b6fc4d67f1223d7c15",
+									"type": "text"
+								}
+							]
+						},
+						"url": {
+							"raw": "http://localhost:3000/subCategories/create",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"subCategories",
+								"create"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "updateSubCategory",
+					"request": {
+						"method": "PATCH",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6Ild3dy53b3JrMTI5QGdtYWlsLmNvbSIsImlkIjoiNjhjY2U1ZmNmMTVhMWM2YTUyOGI0MWIxIiwiaWF0IjoxNzU4MjU4NzkxLCJleHAiOjE3NTgzNDUxOTF9.NFkC225uEiIehIWQUM5ko_zBGy9YCQpnJCkeX62wHio",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "formdata",
+							"formdata": [
+								{
+									"key": "name",
+									"value": "sub category two update ",
+									"type": "text"
+								},
+								{
+									"key": "mainImage",
+									"type": "file",
+									"src": "/G:/Ahmed/صور معدلة/images.jpeg"
+								}
+							]
+						},
+						"url": {
+							"raw": "http://localhost:3000/subCategories/update/68cce8772b9d8efb12223d6c",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"subCategories",
+								"update",
+								"68cce8772b9d8efb12223d6c"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "deleteSubCategory",
+					"request": {
+						"method": "DELETE",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6ImFobWVkbWVkb28xMjkzQGdtYWlsLmNvbSIsImlkIjoiNjhjMTMyNDk2ODI1NjAxZjljZjc0ZTJhIiwiaWF0IjoxNzU3OTc2ODU0LCJleHAiOjE3NTgwNjMyNTR9.429_zypdPUVwTsXSoR_ms3bWRcgDqHBM-sedPVy14TE",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "formdata",
+							"formdata": []
+						},
+						"url": {
+							"raw": "http://localhost:3000/subCategories/delete/68c8c3aac70d488adcdf62c6",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"subCategories",
+								"delete",
+								"68c8c3aac70d488adcdf62c6"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "getAllSubCategories",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "formdata",
+							"formdata": []
+						},
+						"url": {
+							"raw": "http://localhost:3000/subCategories",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"subCategories"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "brands",
+			"item": [
+				{
+					"name": "createBrand",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6Ild3dy53b3JrMTI5QGdtYWlsLmNvbSIsImlkIjoiNjhjY2U1ZmNmMTVhMWM2YTUyOGI0MWIxIiwiaWF0IjoxNzU4MjU4NzkxLCJleHAiOjE3NTgzNDUxOTF9.NFkC225uEiIehIWQUM5ko_zBGy9YCQpnJCkeX62wHio",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "formdata",
+							"formdata": [
+								{
+									"key": "name",
+									"value": "brand two",
+									"type": "text"
+								},
+								{
+									"key": "mainImage",
+									"type": "file",
+									"src": "/G:/Ahmed/صور معدلة/download.jpeg"
+								},
+								{
+									"key": "category",
+									"value": "68cce6b6fc4d67f1223d7c15",
+									"type": "text"
+								},
+								{
+									"key": "subCategory",
+									"value": "68cce8772b9d8efb12223d6c",
+									"type": "text"
+								}
+							]
+						},
+						"url": {
+							"raw": "http://localhost:3000/brands/create",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"brands",
+								"create"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "updateBrand",
+					"request": {
+						"method": "PATCH",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6Ild3dy53b3JrMTI5QGdtYWlsLmNvbSIsImlkIjoiNjhjY2U1ZmNmMTVhMWM2YTUyOGI0MWIxIiwiaWF0IjoxNzU4MjU4NzkxLCJleHAiOjE3NTgzNDUxOTF9.NFkC225uEiIehIWQUM5ko_zBGy9YCQpnJCkeX62wHio",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "formdata",
+							"formdata": [
+								{
+									"key": "name",
+									"value": "brand two update",
+									"type": "text",
+									"disabled": true
+								},
+								{
+									"key": "mainImage",
+									"type": "file",
+									"src": "/G:/Ahmed/صور معدلة/images.jpeg"
+								}
+							]
+						},
+						"url": {
+							"raw": "http://localhost:3000/brands/update/68cceacc7c93cdf90c3cb61f",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"brands",
+								"update",
+								"68cceacc7c93cdf90c3cb61f"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "deleteBrand",
+					"request": {
+						"method": "DELETE",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6ImFobWVkbWVkb28xMjkzQGdtYWlsLmNvbSIsImlkIjoiNjhjMTMyNDk2ODI1NjAxZjljZjc0ZTJhIiwiaWF0IjoxNzU3OTc2ODU0LCJleHAiOjE3NTgwNjMyNTR9.429_zypdPUVwTsXSoR_ms3bWRcgDqHBM-sedPVy14TE",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "formdata",
+							"formdata": []
+						},
+						"url": {
+							"raw": "http://localhost:3000/brands/delete/68c8c591d7dc2b35a44fa3e5",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"brands",
+								"delete",
+								"68c8c591d7dc2b35a44fa3e5"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "getAllBrands",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "formdata",
+							"formdata": []
+						},
+						"url": {
+							"raw": "http://localhost:3000/brands",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"brands"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "products",
+			"item": [
+				{
+					"name": "createProduct",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6Ild3dy53b3JrMTI5QGdtYWlsLmNvbSIsImlkIjoiNjhjY2U1ZmNmMTVhMWM2YTUyOGI0MWIxIiwiaWF0IjoxNzU4MjU4NzkxLCJleHAiOjE3NTgzNDUxOTF9.NFkC225uEiIehIWQUM5ko_zBGy9YCQpnJCkeX62wHio",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "formdata",
+							"formdata": [
+								{
+									"key": "name",
+									"value": "product two",
+									"type": "text"
+								},
+								{
+									"key": "description",
+									"value": "WOW",
+									"type": "text"
+								},
+								{
+									"key": "price",
+									"value": "1000",
+									"type": "text"
+								},
+								{
+									"key": "discount",
+									"value": "20",
+									"type": "text"
+								},
+								{
+									"key": "stock",
+									"value": "15",
+									"type": "text"
+								},
+								{
+									"key": "quantity",
+									"value": "25",
+									"type": "text"
+								},
+								{
+									"key": "subImages",
+									"type": "file",
+									"src": [
+										"/G:/Ahmed/صور معدلة/download.jpeg",
+										"/G:/Ahmed/صور معدلة/images1.jpeg"
+									]
+								},
+								{
+									"key": "mainImage",
+									"type": "file",
+									"src": "/G:/Ahmed/صور معدلة/images.jpeg"
+								},
+								{
+									"key": "subCategory",
+									"value": "68cce8772b9d8efb12223d6c",
+									"type": "text"
+								},
+								{
+									"key": "brand",
+									"value": "68cceacc7c93cdf90c3cb61f",
+									"type": "text"
+								},
+								{
+									"key": "category",
+									"value": "68cce6b6fc4d67f1223d7c15",
+									"type": "text"
+								}
+							]
+						},
+						"url": {
+							"raw": "http://localhost:3000/products/create",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"products",
+								"create"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "updateProduct",
+					"request": {
+						"method": "PATCH",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6Ild3dy53b3JrMTI5QGdtYWlsLmNvbSIsImlkIjoiNjhjY2U1ZmNmMTVhMWM2YTUyOGI0MWIxIiwiaWF0IjoxNzU4MjU4NzkxLCJleHAiOjE3NTgzNDUxOTF9.NFkC225uEiIehIWQUM5ko_zBGy9YCQpnJCkeX62wHio",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "formdata",
+							"formdata": [
+								{
+									"key": "name",
+									"value": "Product two update",
+									"type": "text"
+								},
+								{
+									"key": "description",
+									"value": "amazing",
+									"type": "text",
+									"disabled": true
+								},
+								{
+									"key": "price",
+									"value": "1000",
+									"type": "text",
+									"disabled": true
+								},
+								{
+									"key": "discount",
+									"value": "20",
+									"type": "text",
+									"disabled": true
+								},
+								{
+									"key": "stock",
+									"value": "15",
+									"type": "text",
+									"disabled": true
+								},
+								{
+									"key": "quantity",
+									"value": "25",
+									"type": "text",
+									"disabled": true
+								},
+								{
+									"key": "subImages",
+									"type": "file",
+									"src": [
+										"/G:/Ahmed/صور معدلة/download.jpeg",
+										"/G:/Ahmed/صور معدلة/images.jpeg"
+									],
+									"disabled": true
+								},
+								{
+									"key": "mainImage",
+									"type": "file",
+									"src": "/G:/Ahmed/صور معدلة/images1.jpeg",
+									"disabled": true
+								}
+							]
+						},
+						"url": {
+							"raw": "http://localhost:3000/products/update/68ccecd47c93cdf90c3cb646",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"products",
+								"update",
+								"68ccecd47c93cdf90c3cb646"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "deleteProduct",
+					"request": {
+						"method": "DELETE",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6ImFobWVkbWVkb28xMjkzQGdtYWlsLmNvbSIsImlkIjoiNjhjMTMyNDk2ODI1NjAxZjljZjc0ZTJhIiwiaWF0IjoxNzU3OTc2ODU0LCJleHAiOjE3NTgwNjMyNTR9.429_zypdPUVwTsXSoR_ms3bWRcgDqHBM-sedPVy14TE",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "formdata",
+							"formdata": []
+						},
+						"url": {
+							"raw": "http://localhost:3000/products/delete/68c8b86ce6fa939298d8c6d9",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"products",
+								"delete",
+								"68c8b86ce6fa939298d8c6d9"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "getAllProducts",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "formdata",
+							"formdata": []
+						},
+						"url": {
+							"raw": "http://localhost:3000/products?name=two",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"products"
+							],
+							"query": [
+								{
+									"key": "name",
+									"value": "two"
+								}
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "coupons",
+			"item": [
+				{
+					"name": "createCoupon",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6ImFobWVkbWVkb28xMjkzQGdtYWlsLmNvbSIsImlkIjoiNjhjMTMyNDk2ODI1NjAxZjljZjc0ZTJhIiwiaWF0IjoxNzU4MTc0Njg3LCJleHAiOjE3NTgyNjEwODd9.xD2KTaXyZeWwPpNk1HuPcBbANEAVAgHcZiPxOw3nkHw",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"code\": \"ahmed2\",\r\n    \"amount\": 20,\r\n    \"fromDate\": \"2025-09-20\",\r\n    \"toDate\": \"2025-09-20\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:3000/coupons/create",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"coupons",
+								"create"
+							],
+							"query": [
+								{
+									"key": "name",
+									"value": "oppo",
+									"disabled": true
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "updateCoupon",
+					"request": {
+						"method": "PATCH",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6ImFobWVkbWVkb28xMjkzQGdtYWlsLmNvbSIsImlkIjoiNjhjMTMyNDk2ODI1NjAxZjljZjc0ZTJhIiwiaWF0IjoxNzU3OTk0MjEwLCJleHAiOjE3NTgwODA2MTB9.ISXZMiMVzCnNJxVBN6-7-haR7SnSryIo76KL3pD0-mY",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"amount\": 25\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:3000/coupons/update/68c79e3f12990fba8bccecd9",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"coupons",
+								"update",
+								"68c79e3f12990fba8bccecd9"
+							],
+							"query": [
+								{
+									"key": "name",
+									"value": "oppo",
+									"disabled": true
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "deleteCoupon",
+					"request": {
+						"method": "DELETE",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6ImFobWVkbWVkb28xMjkzQGdtYWlsLmNvbSIsImlkIjoiNjhjMTMyNDk2ODI1NjAxZjljZjc0ZTJhIiwiaWF0IjoxNzU3OTk0MjEwLCJleHAiOjE3NTgwODA2MTB9.ISXZMiMVzCnNJxVBN6-7-haR7SnSryIo76KL3pD0-mY",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:3000/coupons/delete/68c79e3f12990fba8bccecd9",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"coupons",
+								"delete",
+								"68c79e3f12990fba8bccecd9"
+							],
+							"query": [
+								{
+									"key": "name",
+									"value": "oppo",
+									"disabled": true
+								}
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "carts",
+			"item": [
+				{
+					"name": "addToCart",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6ImFobWVkbWVkb28xMjkzQGdtYWlsLmNvbSIsImlkIjoiNjhjMTMyNDk2ODI1NjAxZjljZjc0ZTJhIiwiaWF0IjoxNzU4MjYxNTUxLCJleHAiOjE3NTgzNDc5NTF9.ACtxpJIntZ6xSPl_Mme-IY0BWn0tJq2Z_ki_kj285ss",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"productId\": \"68ccecd47c93cdf90c3cb646\",\r\n    \"quantity\": 2\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:3000/carts/add",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"carts",
+								"add"
+							],
+							"query": [
+								{
+									"key": "name",
+									"value": "oppo",
+									"disabled": true
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "removeFromCart",
+					"request": {
+						"method": "PATCH",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6ImFobWVkbWVkb28xMjkzQGdtYWlsLmNvbSIsImlkIjoiNjhjMTMyNDk2ODI1NjAxZjljZjc0ZTJhIiwiaWF0IjoxNzU4MjYxNTUxLCJleHAiOjE3NTgzNDc5NTF9.ACtxpJIntZ6xSPl_Mme-IY0BWn0tJq2Z_ki_kj285ss",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"productId\": \"68ccec797c93cdf90c3cb63d\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:3000/carts/remove",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"carts",
+								"remove"
+							],
+							"query": [
+								{
+									"key": "name",
+									"value": "oppo",
+									"disabled": true
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "updateQuantity",
+					"request": {
+						"method": "PATCH",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6ImFobWVkbWVkb28xMjkzQGdtYWlsLmNvbSIsImlkIjoiNjhjMTMyNDk2ODI1NjAxZjljZjc0ZTJhIiwiaWF0IjoxNzU4MjYxNTUxLCJleHAiOjE3NTgzNDc5NTF9.ACtxpJIntZ6xSPl_Mme-IY0BWn0tJq2Z_ki_kj285ss",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"productId\": \"68ccecd47c93cdf90c3cb646\",\r\n    \"quantity\": 3\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:3000/carts/update",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"carts",
+								"update"
+							],
+							"query": [
+								{
+									"key": "name",
+									"value": "oppo",
+									"disabled": true
+								}
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "orders",
+			"item": [
+				{
+					"name": "createOrder",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6ImFobWVkbWVkb28xMjkzQGdtYWlsLmNvbSIsImlkIjoiNjhjMTMyNDk2ODI1NjAxZjljZjc0ZTJhIiwiaWF0IjoxNzU4MjU2MDExLCJleHAiOjE3NTgzNDI0MTF9.A21jLsPvgIkPhnybEGaHHK-j6LdVoPrEV0fePiFc9IA",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"phone\": \"01221031276\",\r\n    \"address\": \"Tanta\",\r\n    \"paymentMethod\": \"card\",\r\n    \"couponCode\": \"ahmed2\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:3000/orders/create",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"orders",
+								"create"
+							],
+							"query": [
+								{
+									"key": "name",
+									"value": "oppo",
+									"disabled": true
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "paymentWithStripe",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6ImFobWVkbWVkb28xMjkzQGdtYWlsLmNvbSIsImlkIjoiNjhjMTMyNDk2ODI1NjAxZjljZjc0ZTJhIiwiaWF0IjoxNzU4MjU2MDExLCJleHAiOjE3NTgzNDI0MTF9.A21jLsPvgIkPhnybEGaHHK-j6LdVoPrEV0fePiFc9IA",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"orderId\": \"68ccdcd42fab5d66c75f6986\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:3000/orders/payment",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"orders",
+								"payment"
+							],
+							"query": [
+								{
+									"key": "name",
+									"value": "oppo",
+									"disabled": true
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "cancelOrder",
+					"request": {
+						"method": "PATCH",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6ImFobWVkbWVkb28xMjkzQGdtYWlsLmNvbSIsImlkIjoiNjhjMTMyNDk2ODI1NjAxZjljZjc0ZTJhIiwiaWF0IjoxNzU4MjYxNTUxLCJleHAiOjE3NTgzNDc5NTF9.ACtxpJIntZ6xSPl_Mme-IY0BWn0tJq2Z_ki_kj285ss",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"orderId\": \"68ccdcd42fab5d66c75f6986\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:3000/orders/cancel",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"orders",
+								"cancel"
+							],
+							"query": [
+								{
+									"key": "name",
+									"value": "oppo",
+									"disabled": true
+								}
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		}
+	]
+}
