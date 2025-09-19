@@ -1,0 +1,54 @@
+# ------------------------------------------------------
+# THIS FILE WAS AUTOMATICALLY GENERATED (DO NOT MODIFY)
+# ------------------------------------------------------
+
+type CartProductsType {
+  productId: ID!
+  quantity: Float!
+  finalPrice: Float!
+}
+
+type CartType {
+  _id: ID!
+  userId: ID!
+  products: [CartProductsType!]!
+  subTotal: Float!
+}
+
+type OrderType {
+  _id: ID!
+  userId: ID!
+  cartId: CartType!
+  totalPrice: Float!
+  phone: String!
+  address: String!
+  paymentMethod: PaymentMethodTypes!
+  status: OrderStatusTypes!
+  arrivesAt: DateTime
+}
+
+enum PaymentMethodTypes {
+  cash
+  card
+}
+
+enum OrderStatusTypes {
+  pending
+  placed
+  onWay
+  delivered
+  cancelled
+  rejected
+  refunded
+  paid
+}
+
+"""
+A date-time string at UTC, such as 2019-12-03T09:54:33Z, compliant with the date-time format.
+"""
+scalar DateTime
+
+type Query {
+  """list of orders"""
+  listOrders: [OrderType!]!
+}
