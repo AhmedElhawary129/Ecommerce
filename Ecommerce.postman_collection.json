@@ -16,7 +16,7 @@
 						"header": [],
 						"body": {
 							"mode": "raw",
-							"raw": "{\r\n    \"firstName\":\"Ahmed\",\r\n    \"lastName\":\"Elhawary\",\r\n    \"email\": \"user1@gmail.com\",\r\n    \"password\": \"user1@12345\",\r\n    \"confirmPassword\": \"User@12345\",\r\n    \"DOB\": \"2003-09-12\",\r\n    \"gender\": \"male\",\r\n    \"phone\": \"01234567890\",\r\n    \"address\": \"Tanta\",\r\n    \"role\": \"admin\"\r\n}",
+							"raw": "{\r\n    \"firstName\":\"User\",\r\n    \"lastName\":\"One\",\r\n    \"email\": \"user1@gmail.com\",\r\n    \"password\": \"user1@12345\",\r\n    \"confirmPassword\": \"User@12345\",\r\n    \"DOB\": \"2003-09-12\",\r\n    \"gender\": \"male\",\r\n    \"phone\": \"01234567890\",\r\n    \"address\": \"Tanta\",\r\n    \"role\": \"admin\"\r\n}",
 							"options": {
 								"raw": {
 									"language": "json"
