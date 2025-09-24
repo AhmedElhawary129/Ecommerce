@@ -2,9 +2,11 @@ name: CI
 on:
   push:
   pull_request:
+
 jobs:
   build:
     runs-on: ubuntu-latest
+
     steps:
       - uses: actions/checkout@v4
 
@@ -13,10 +15,15 @@ jobs:
           node-version: 22
           cache: npm
 
-      - run: npm ci --no-audit --fund=false
-      - run: npm run build
+      - name: Install deps
+        run: npm ci --no-audit --fund=false
+
+      - name: Build
+        run: npm run build
 
       - name: Lint (non-blocking)
-        run: npm run lint || echo "lint errors (non-blocking)"
+        run: npm run lint -- --quiet || echo "lint errors (non-blocking)"
+        continue-on-error: true
 
-      - run: npm test -- --passWithNoTests
+      - name: Test
+        run: npm test -- --passWithNoTests
