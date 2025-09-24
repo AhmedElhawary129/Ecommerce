@@ -1,98 +1,285 @@
-<p align="center">
-  <a href="http://nestjs.com/" target="blank"><img src="https://nestjs.com/img/logo-small.svg" width="120" alt="Nest Logo" /></a>
-</p>
+# E-commerce Backend (NestJS · TypeScript · MongoDB)
 
-[circleci-image]: https://img.shields.io/circleci/build/github/nestjs/nest/master?token=abc123def456
-[circleci-url]: https://circleci.com/gh/nestjs/nest
+[![CI](https://github.com/AhmedElhawary129/Ecommerce/actions/workflows/ci.yml/badge.svg)](https://github.com/AhmedElhawary129/Ecommerce/actions/workflows/ci.yml)
+![Node](https://img.shields.io/badge/Node-22%2B-339933?logo=node.js&logoColor=white)
+![NestJS](https://img.shields.io/badge/NestJS-Framework-E0234E?logo=nestjs&logoColor=white)
+![TypeScript](https://img.shields.io/badge/TypeScript-5.x-3178C6?logo=typescript&logoColor=white)
+![MongoDB](https://img.shields.io/badge/MongoDB-Mongoose-47A248?logo=mongodb&logoColor=white)
+[![License: MIT](https://img.shields.io/badge/License-MIT-blue.svg)](LICENSE)
 
-  <p align="center">A progressive <a href="http://nodejs.org" target="_blank">Node.js</a> framework for building efficient and scalable server-side applications.</p>
-    <p align="center">
-<a href="https://www.npmjs.com/~nestjscore" target="_blank"><img src="https://img.shields.io/npm/v/@nestjs/core.svg" alt="NPM Version" /></a>
-<a href="https://www.npmjs.com/~nestjscore" target="_blank"><img src="https://img.shields.io/npm/l/@nestjs/core.svg" alt="Package License" /></a>
-<a href="https://www.npmjs.com/~nestjscore" target="_blank"><img src="https://img.shields.io/npm/dm/@nestjs/common.svg" alt="NPM Downloads" /></a>
-<a href="https://circleci.com/gh/nestjs/nest" target="_blank"><img src="https://img.shields.io/circleci/build/github/nestjs/nest/master" alt="CircleCI" /></a>
-<a href="https://discord.gg/G7Qnnhy" target="_blank"><img src="https://img.shields.io/badge/discord-online-brightgreen.svg" alt="Discord"/></a>
-<a href="https://opencollective.com/nest#backer" target="_blank"><img src="https://opencollective.com/nest/backers/badge.svg" alt="Backers on Open Collective" /></a>
-<a href="https://opencollective.com/nest#sponsor" target="_blank"><img src="https://opencollective.com/nest/sponsors/badge.svg" alt="Sponsors on Open Collective" /></a>
-  <a href="https://paypal.me/kamilmysliwiec" target="_blank"><img src="https://img.shields.io/badge/Donate-PayPal-ff3f59.svg" alt="Donate us"/></a>
-    <a href="https://opencollective.com/nest#sponsor"  target="_blank"><img src="https://img.shields.io/badge/Support%20us-Open%20Collective-41B883.svg" alt="Support us"></a>
-  <a href="https://twitter.com/nestframework" target="_blank"><img src="https://img.shields.io/twitter/follow/nestframework.svg?style=social&label=Follow" alt="Follow us on Twitter"></a>
-</p>
-  <!--[![Backers on Open Collective](https://opencollective.com/nest/backers/badge.svg)](https://opencollective.com/nest#backer)
-  [![Sponsors on Open Collective](https://opencollective.com/nest/sponsors/badge.svg)](https://opencollective.com/nest#sponsor)-->
+A modular, production-ready backend for an e-commerce system built with **NestJS** and **TypeScript**, using **MongoDB** via **Mongoose**.  
+It exposes **REST APIs** for all core domains and provides **GraphQL** for order workflows. File uploads are supported (Multer + Cloudinary), and payments are integrated with Stripe.
 
-## Description
+---
 
-[Nest](https://github.com/nestjs/nest) framework TypeScript starter repository.
+## Features
 
-## Project setup
+- **Domains (modules):** brands, categories, subCategories, products, users, carts, coupons, orders.
+- **APIs:** REST across all modules + **/graphql** for orders.
+- **Auth & Roles:** JWT (access/refresh) and role-based guards.
+- **Validation:** DTOs with class-validator/class-transformer.
+- **Uploads:** Multer + Cloudinary integration.
+- **Payments:** Stripe (secret key + webhook).
+- **Caching:** Nest CacheInterceptor where applicable.
+- **Quality:** Jest tests, ESLint, Prettier.
+- **Postman:** `Ecommerce.postman_collection.json` for quick testing.
 
-```bash
-$ npm install
+---
+
+## Tech Stack
+
+- **Runtime:** Node.js (v22+)
+- **Framework:** NestJS (Express)
+- **Language:** TypeScript
+- **Database:** MongoDB (Mongoose)
+- **APIs:** REST + GraphQL (Apollo)
+- **Media:** Cloudinary
+- **Payments:** Stripe
+- **Tooling:** Jest, ESLint, Prettier, Multer
+
+---
+
+## Folder Structure
+
+```text
+Ecommerce/
+├─ src/
+│  ├─ main.ts
+│  ├─ app.module.ts
+│  ├─ graphql/
+│  │  ├─ graphql.config.ts
+│  │  ├─ resolver/
+│  │  │  └─ order.resolver.ts
+│  │  └─ types/
+│  │     └─ order.types.ts
+│  ├─ DB/
+│  │  └─ models/
+│  │     ├─ brand.model.ts
+│  │     ├─ cart.model.ts
+│  │     ├─ category.model.ts
+│  │     ├─ coupon.model.ts
+│  │     ├─ order.model.ts
+│  │     ├─ otp.model.ts
+│  │     ├─ product.model.ts
+│  │     ├─ subcategory.model.ts
+│  │     └─ user.model.ts
+│  ├─ common/
+│  │  ├─ cloudinary/
+│  │  ├─ constants/
+│  │  ├─ decorator/
+│  │  ├─ guards/
+│  │  ├─ security/
+│  │  ├─ service/
+│  │  └─ utils/
+│  └─ modules/
+│     ├─ brands/
+│     ├─ categories/
+│     ├─ subCategories/
+│     ├─ products/
+│     ├─ users/
+│     ├─ carts/
+│     ├─ coupons/
+│     └─ orders/
+├─ test/
+├─ Ecommerce.postman_collection.json
+├─ nest-cli.json
+├─ tsconfig.json
+├─ tsconfig.build.json
+├─ eslint.config.mjs
+├─ .prettierrc
+├─ .gitignore
+├─ schema.gql
+├─ srschema.gql
+└─ package.json
 ```
 
-## Compile and run the project
+---
+
+## Quick Start
 
 ```bash
-# development
-$ npm run start
+# 1) Install dependencies
+npm install
 
-# watch mode
-$ npm run start:dev
+# 2) Create environment file (do NOT commit real secrets)
+#    Required path: ./config/.env
+mkdir -p config && touch config/.env
 
-# production mode
-$ npm run start:prod
+# 3) Run in development (watch)
+npm run start:dev
+
+# 4) Build & run in production
+npm run build
+npm run start:prod
 ```
 
-## Run tests
+- Base URL (default): `http://localhost:3000`
+- GraphQL Playground: `http://localhost:3000/graphql`
+
+---
+
+## Environment Variables
+
+Create `./config/.env` (local only) and **commit a safe example** as `./config/.env.example`:
+
+```env
+# .env (local, do NOT commit)
+PORT=3000
+DB_URL=mongodb://localhost:27017/ecommerce
+ACCESS_TOKEN_SIGNATURE=replace_me_access
+REFRISH_TOKEN_SIGNATURE=replace_me_refresh
+SALT_ROUNDS=10
+
+# Optional – enable when needed
+ENCRYPT_SECRET=
+EMAIL=
+PASSWORD=
+CLOUDINARY_NAME=
+CLOUDINARY_API_KEY=
+CLOUDINARY_API_SECRET=
+CLOUDINARY_FOLDER=
+STRIPE_SECRET_KEY=
+```
+
+Example to commit:
+```env
+# config/.env.example (safe to commit)
+PORT=3000
+DB_URL=mongodb://localhost:27017/ecommerce
+ACCESS_TOKEN_SIGNATURE=CHANGE_ME
+REFRISH_TOKEN_SIGNATURE=CHANGE_ME
+SALT_ROUNDS=10
+ENCRYPT_SECRET=
+EMAIL=
+PASSWORD=
+CLOUDINARY_NAME=
+CLOUDINARY_API_KEY=
+CLOUDINARY_API_SECRET=
+CLOUDINARY_FOLDER=
+STRIPE_SECRET_KEY=
+```
+
+Ensure `.gitignore` excludes real env files:
+```gitignore
+# Environment
+config/.env
+config/*.env
+*.env
+```
+
+---
+
+## NPM Scripts
 
 ```bash
-# unit tests
-$ npm run test
-
-# e2e tests
-$ npm run test:e2e
-
-# test coverage
-$ npm run test:cov
+npm run start:dev   # Development (watch)
+npm start           # Start
+npm run build       # Build TypeScript -> dist/
+npm run start:prod  # Run compiled app (production)
+npm run lint        # ESLint
+npm run format      # Prettier
+npm test            # Jest
 ```
 
-## Deployment
+---
 
-When you're ready to deploy your NestJS application to production, there are some key steps you can take to ensure it runs as efficiently as possible. Check out the [deployment documentation](https://docs.nestjs.com/deployment) for more information.
+## REST API Overview
 
-If you are looking for a cloud-based platform to deploy your NestJS application, check out [Mau](https://mau.nestjs.com), our official platform for deploying NestJS applications on AWS. Mau makes deployment straightforward and fast, requiring just a few simple steps:
+> Base: `http://localhost:<PORT>`
 
-```bash
-$ npm install -g @nestjs/mau
-$ mau deploy
+### Brands
+- `POST /brands/create`
+- `PATCH /brands/update/:id`
+- `DELETE /brands/delete/:id`
+- `GET /brands`
+
+### Categories
+- `POST /categories/create`
+- `PATCH /categories/update/:id`
+- `DELETE /categories/delete/:id`
+- `GET /categories`
+
+### Sub-Categories
+- `POST /subCategories/create`
+- `PATCH /subCategories/update/:id`
+- `DELETE /subCategories/delete/:id`
+- `GET /subCategories`
+
+### Products
+- `POST /products/create`
+- `PATCH /products/update/:productId`
+- `DELETE /products/delete/:id`
+- `GET /products`
+
+### Users
+- `POST /users/signUp`
+- `PATCH /users/confirmEmail`
+- `POST /users/signIn`
+- `GET /users/profile`
+
+### Carts
+- `POST /carts/add`
+- `PATCH /carts/remove`
+- `PATCH /carts/update`
+
+### Coupons
+- `POST /coupons/create`
+- `PATCH /coupons/update/:id`
+- `DELETE /coupons/delete/:id`
+
+### Orders
+- `POST /orders/create`
+- `POST /orders/payment`
+- `POST /orders/webhook`
+- `GET /orders/success`
+- `GET /orders/cancel`
+- `PATCH /orders/cancel`
+
+---
+
+## GraphQL
+
+- Endpoint: `POST /graphql`
+- Resolvers: orders (auto-generated schema present: `schema.gql`, `srschema.gql`)
+- Example query (illustrative):
+```graphql
+query {
+  orders {
+    id
+    total
+    status
+    userId
+    items { productId quantity price }
+  }
+}
 ```
 
-With Mau, you can deploy your application in just a few clicks, allowing you to focus on building features rather than managing infrastructure.
+---
 
-## Resources
+## Uploads & Payments
 
-Check out a few resources that may come in handy when working with NestJS:
+- **Uploads:** Multer + Cloudinary. Configure `CLOUDINARY_*` variables when enabling uploads.
+- **Payments:** Stripe secret key via `STRIPE_SECRET_KEY`. Webhook receiver at `/orders/webhook`.
 
-- Visit the [NestJS Documentation](https://docs.nestjs.com) to learn more about the framework.
-- For questions and support, please visit our [Discord channel](https://discord.gg/G7Qnnhy).
-- To dive deeper and get more hands-on experience, check out our official video [courses](https://courses.nestjs.com/).
-- Deploy your application to AWS with the help of [NestJS Mau](https://mau.nestjs.com) in just a few clicks.
-- Visualize your application graph and interact with the NestJS application in real-time using [NestJS Devtools](https://devtools.nestjs.com).
-- Need help with your project (part-time to full-time)? Check out our official [enterprise support](https://enterprise.nestjs.com).
-- To stay in the loop and get updates, follow us on [X](https://x.com/nestframework) and [LinkedIn](https://linkedin.com/company/nestjs).
-- Looking for a job, or have a job to offer? Check out our official [Jobs board](https://jobs.nestjs.com).
+---
 
-## Support
+## Testing & Tooling
 
-Nest is an MIT-licensed open source project. It can grow thanks to the sponsors and support by the amazing backers. If you'd like to join them, please [read more here](https://docs.nestjs.com/support).
+- **Testing:** Jest (unit/e2e). Sample e2e spec in `test/app.e2e-spec.ts`.
+- **Code Quality:** ESLint + Prettier.
+- **CLI:** `nest-cli.json` uses `src` as `sourceRoot`.
+- **Postman:** `Ecommerce.postman_collection.json` at the root.
 
-## Stay in touch
+---
 
-- Author - [Kamil Myśliwiec](https://twitter.com/kammysliwiec)
-- Website - [https://nestjs.com](https://nestjs.com/)
-- Twitter - [@nestframework](https://twitter.com/nestframework)
+## Contributing
+
+1. Fork the repo and create a feature branch: `git checkout -b feat/your-feature`
+2. Run lint & tests locally: `npm run lint && npm test`
+3. Open a Pull Request with a clear description.
+
+---
 
 ## License
 
-Nest is [MIT licensed](https://github.com/nestjs/nest/blob/master/LICENSE).
+Released under the **MIT License**. See [LICENSE](LICENSE) for details.
