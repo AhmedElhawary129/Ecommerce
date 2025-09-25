@@ -120,42 +120,34 @@ npm run start:prod
 
 ## Environment Variables
 
-Create `./config/.env` (local only) and **commit a safe example** as `./config/.env.example`:
+Use config/.env.example as a template, and keep real secrets only in config/.env.
 
-```env
-# .env (local, do NOT commit)
+# -------- Server --------
 PORT=3000
-DB_URL=mongodb://localhost:27017/ecommerce
-ACCESS_TOKEN_SIGNATURE=replace_me_access
-REFRESH_TOKEN_SIGNATURE=replace_me_refresh
-SALT_ROUNDS=10
 
-# Optional – enable when needed
-ENCRYPT_SECRET=
-EMAIL=
-PASSWORD=
-CLOUDINARY_NAME=
-CLOUDINARY_API_KEY=
-CLOUDINARY_API_SECRET=
-CLOUDINARY_FOLDER=
-STRIPE_SECRET_KEY=
-```
-
-Example to commit:
-```env
-# config/.env.example (safe to commit)
-PORT=3000
+# -------- Database --------
 DB_URL=mongodb://localhost:27017/ecommerce
+
+# -------- JWT / Auth --------
 ACCESS_TOKEN_SIGNATURE=CHANGE_ME
 REFRESH_TOKEN_SIGNATURE=CHANGE_ME
+
+# -------- Hashing -------
 SALT_ROUNDS=10
 ENCRYPT_SECRET=
+
+
+# -------- Email (Nodemailer) --------
 EMAIL=
 PASSWORD=
+
+# -------- Cloudinary --------
 CLOUDINARY_NAME=
 CLOUDINARY_API_KEY=
 CLOUDINARY_API_SECRET=
 CLOUDINARY_FOLDER=
+
+# -------- Stripe--------
 STRIPE_SECRET_KEY=
 ```
 
