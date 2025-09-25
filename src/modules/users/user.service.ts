@@ -146,7 +146,7 @@ export class UserService {
 
       const refresh_token = this.tokenService.generateToken(
         { email, id: user["_id"] },
-        { secret: process.env.REFRISH_TOKEN_SIGNATURE, expiresIn: "1w" },
+        { secret: process.env.REFRESH_TOKEN_SIGNATURE, expiresIn: "1w" },
       );
 
       let prefix = "";
