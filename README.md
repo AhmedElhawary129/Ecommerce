@@ -120,7 +120,9 @@ npm run start:prod
 
 ## Environment Variables
 
-Use config/.env.example as a template, and keep real secrets only in config/.env.
+Use `config/.env.example` as a template, and keep real secrets only in `config/.env`.
+
+```env
 
 # -------- Server --------
 PORT=3000
@@ -151,6 +153,7 @@ CLOUDINARY_FOLDER=
 STRIPE_SECRET_KEY=
 ```
 
+**.gitignore**
 Ensure `.gitignore` excludes real env files:
 ```gitignore
 # Environment
