@@ -127,7 +127,7 @@ Create `./config/.env` (local only) and **commit a safe example** as `./config/.
 PORT=3000
 DB_URL=mongodb://localhost:27017/ecommerce
 ACCESS_TOKEN_SIGNATURE=replace_me_access
-REFRISH_TOKEN_SIGNATURE=replace_me_refresh
+REFRESH_TOKEN_SIGNATURE=replace_me_refresh
 SALT_ROUNDS=10
 
 # Optional – enable when needed
@@ -147,7 +147,7 @@ Example to commit:
 PORT=3000
 DB_URL=mongodb://localhost:27017/ecommerce
 ACCESS_TOKEN_SIGNATURE=CHANGE_ME
-REFRISH_TOKEN_SIGNATURE=CHANGE_ME
+REFRESH_TOKEN_SIGNATURE=CHANGE_ME
 SALT_ROUNDS=10
 ENCRYPT_SECRET=
 EMAIL=
