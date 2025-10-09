@@ -1,47 +1,107 @@
-# E-commerce Application (NestJS · TypeScript · MongoDB)
+# E‑commerce Application (NestJS · MongoDB · GraphQL)
 
-[![CI](https://github.com/AhmedElhawary129/Ecommerce/actions/workflows/ci.yml/badge.svg)](https://github.com/AhmedElhawary129/Ecommerce/actions/workflows/ci.yml)
+Production‑ready backend for an **e‑commerce** platform, built with **NestJS (TypeScript)** and **MongoDB (Mongoose)**. Exposes **REST controllers** for core resources and a **GraphQL** endpoint (generated schema), supports **file uploads** with **Multer + Cloudinary**, and includes strong **auth/guards**, **validation**, and **repository** abstractions.
+
 ![Node](https://img.shields.io/badge/Node-22%2B-339933?logo=node.js&logoColor=white)
-![NestJS](https://img.shields.io/badge/NestJS-Framework-E0234E?logo=nestjs&logoColor=white)
-![TypeScript](https://img.shields.io/badge/TypeScript-5.x-3178C6?logo=typescript&logoColor=white)
+![NestJS](https://img.shields.io/badge/NestJS-10.x-E0234E?logo=nestjs&logoColor=white)
 ![MongoDB](https://img.shields.io/badge/MongoDB-Mongoose-47A248?logo=mongodb&logoColor=white)
+![GraphQL](https://img.shields.io/badge/GraphQL-16.x-E10098?logo=graphql&logoColor=white)
+![TypeScript](https://img.shields.io/badge/TypeScript-5.x-3178C6?logo=typescript&logoColor=white)
+![Cloudinary](https://img.shields.io/badge/Uploads-Cloudinary-3448C5?logo=cloudinary&logoColor=white)
+![Stripe](https://img.shields.io/badge/Payments-Stripe-635BFF?logo=stripe&logoColor=white)
 [![License: MIT](https://img.shields.io/badge/License-MIT-blue.svg)](LICENSE)
 
-A modular, production-ready backend for an e-commerce system built with **NestJS** and **TypeScript**, using **MongoDB** via **Mongoose**.  
-It exposes **REST APIs** for all core domains and provides **GraphQL** for order workflows. File uploads are supported (Multer + Cloudinary), and payments are integrated with Stripe.
+---
+
+## Table of Contents
+- [Features](#features)
+- [Architecture Overview](#architecture-overview)
+- [Tech Stack](#tech-stack)
+- [Project Structure](#project-structure)
+- [Getting Started](#getting-started)
+  - [Prerequisites](#prerequisites)
+  - [Installation](#installation)
+  - [Environment Variables](#environment-variables)
+  - [Run Locally](#run-locally)
+  - [Build & Run in Production](#build--run-in-production)
+- [API Overview](#api-overview)
+  - [Authentication](#authentication)
+  - [Catalog](#catalog)
+  - [Cart & Checkout](#cart--checkout)
+  - [Orders](#orders)
+  - [GraphQL](#graphql)
+  - [Pagination](#pagination)
+  - [Error Format](#error-format)
+- [Security & Hardening](#security--hardening)
+- [Conventions](#conventions)
+- [Testing](#testing)
+- [Troubleshooting](#troubleshooting)
+- [Roadmap](#roadmap)
+- [CI](#ci)
+- [License](#license)
 
 ---
 
 ## Features
+- **Authentication & Authorization**
+  - Access/refresh **JWT** with separate signatures
+  - Role‑based guards and custom decorators (auth, role, current user)
+  - Password hashing and data encryption helpers
+- **Catalog**
+  - **Brands**, **Categories**, **Sub‑Categories**, **Products** (with media)
+  - Server‑side filtering, sorting, and query DTOs
+- **Cart & Coupons**
+  - Cart CRUD, coupon creation/redemption, discounts and totals
+- **Orders & Payments**
+  - Order creation/status lifecycle
+  - **Stripe** server integration ready via `STRIPE_SECRET_KEY`
+  - Email notifications (via Nodemailer)
+- **Uploads**
+  - **Multer** adapters and **Cloudinary** integration for images
+- **DX & Safety**
+  - Modular NestJS design with repository layer
+  - Centralized error handling and consistent response shape
+  - **GraphQL** schema (`schema.gql`) + resolvers for typed/aggregate queries
 
-- **Domains (modules):** brands, categories, subCategories, products, users, carts, coupons, orders.
-- **APIs:** REST across all modules + **/graphql** for orders.
-- **Auth & Roles:** JWT (access/refresh) and role-based guards.
-- **Validation:** DTOs with class-validator/class-transformer.
-- **Uploads:** Multer + Cloudinary integration.
-- **Payments:** Stripe (secret key + webhook).
-- **Caching:** Nest CacheInterceptor where applicable.
-- **Quality:** Jest tests, ESLint, Prettier.
-- **Postman:** `Ecommerce.postman_collection.json` for quick testing.
+> The repository contains both TypeScript source (`src/`) and compiled JavaScript output (`dist/`).
+
+---
+
+## Architecture Overview
+- **`main.ts`**: Nest application bootstrap (NestFactory), global pipes/filters, and module wiring.
+- **`app.module.ts`**: Root module importing feature modules and global providers.
+- **Database (`src/DB/`)**
+  - **Models**: `user`, `product`, `order`, `cart`, `brand`, `category`, `subCategory`, `coupon`, `otp`
+  - **Repository layer**: generic `DataBase.Repository` plus per‑entity repositories
+- **Common (`src/common/`)**
+  - **Security**: hashing & encryption utilities
+  - **Guards**: authentication / authorization
+  - **Decorators**: auth / role / user decorators
+  - **Services**: token, file upload, email
+  - **Cloudinary** adapters & configuration
+  - **Utils**: filter/query DTOs, multer adapters
+- **GraphQL (`src/graphql/`)**
+  - GraphQL config, types, and resolvers (orders ready‑made)
+- **Feature Modules (`src/modules/`)**
+  - `users`, `brands`, `categories`, `subCategories`, `products`, `carts`, `coupons`, `orders`
 
 ---
 
 ## Tech Stack
-
-- **Runtime:** Node.js (v22+)
-- **Framework:** NestJS (Express)
-- **Language:** TypeScript
-- **Database:** MongoDB (Mongoose)
-- **APIs:** REST + GraphQL (Apollo)
-- **Media:** Cloudinary
-- **Payments:** Stripe
-- **Tooling:** Jest, ESLint, Prettier, Multer
+- **Runtime**: Node.js (TypeScript)
+- **Framework**: NestJS
+- **Database**: MongoDB (Mongoose)
+- **API**: REST controllers + GraphQL schema/resolvers
+- **Auth**: JWT (access/refresh), bcrypt hashing, guards/decorators
+- **Uploads**: Multer + Cloudinary
+- **Payments**: Stripe
+- **Email**: Nodemailer
+- **Tooling**: Nest CLI, ESLint
 
 ---
 
-## Folder Structure
-
-```text
+## Project Structure
+```
 Ecommerce/
 ├─ src/
 │  ├─ main.ts
@@ -93,188 +153,189 @@ Ecommerce/
 └─ package.json
 ```
 
+> The `dist/` directory is generated — keep source of truth in `src/` and commit JS output only if your deployment requires it.
+
 ---
 
-## Quick Start
+## Getting Started
 
+### Prerequisites
+- **Node.js** v22+ (LTS recommended)
+- **MongoDB** 6.x+ (local or Atlas)
+- **Cloudinary** account for media & **SMTP** (e.g., Gmail App Password) for emails
+- **Stripe** secret key (if payments are enabled)
+
+### Installation
 ```bash
-# 1) Install dependencies
 npm install
 
-# 2) Create environment file (do NOT commit real secrets)
-#    Required path: ./config/.env
-mkdir -p config && touch config/.env
-
-# 3) Run in development (watch)
-npm run start:dev
-
-# 4) Build & run in production
-npm run build
-npm run start:prod
+# Copy env template and fill in your values
+cp config/.env.example .env
 ```
 
-- Base URL (default): `http://localhost:3000`
-- GraphQL Playground: `http://localhost:3000/graphql`
+### Environment Variables
+Create `.env` with the following keys (see `config/.env.example` for the complete list):
 
----
-
-## Environment Variables
-
-Use `config/.env.example` as a template, and keep real secrets only in `config/.env`.
-
-```env
-
-# -------- Server --------
+```dotenv
+# Server
 PORT=3000
 
-# -------- Database --------
+# Database
 DB_URL=mongodb://localhost:27017/ecommerce
 
-# -------- JWT / Auth --------
-ACCESS_TOKEN_SIGNATURE=CHANGE_ME
-REFRESH_TOKEN_SIGNATURE=CHANGE_ME
+# JWT / Security
+ACCESS_TOKEN_SIGNATURE=change_me
+REFRESH_TOKEN_SIGNATURE=change_me
+SALT_ROUNDS=12
+ENCRYPT_SECRET=change_me
 
-# -------- Hashing -------
-SALT_ROUNDS=10
-ENCRYPT_SECRET=
-
-
-# -------- Email (Nodemailer) --------
-EMAIL=
-PASSWORD=
-
-# -------- Cloudinary --------
+# Cloudinary
 CLOUDINARY_NAME=
 CLOUDINARY_API_KEY=
 CLOUDINARY_API_SECRET=
-CLOUDINARY_FOLDER=
+CLOUDINARY_FOLDER=ecommerce
 
-# -------- Stripe--------
-STRIPE_SECRET_KEY=
+# Email (Nodemailer)
+EMAIL=you@example.com
+PASSWORD=your_app_password
+
+# Payments (Stripe)
+STRIPE_SECRET_KEY=Stripe_Key
 ```
 
-**.gitignore**
-Ensure `.gitignore` excludes real env files:
-```gitignore
-# Environment
-config/.env
-config/*.env
-*.env
-```
+> **Do not commit secrets.** Use a secret manager for production.
 
----
-
-## NPM Scripts
-
+### Run Locally
 ```bash
-npm run start:dev   # Development (watch)
-npm start           # Start
-npm run build       # Build TypeScript -> dist/
-npm run start:prod  # Run compiled app (production)
-npm run lint        # ESLint
-npm run format      # Prettier
-npm test            # Jest
+# Development (watch mode)
+npm run start:dev
+
+# Standard start (after compilation)
+npm run start
 ```
+
+### Build & Run in Production
+```bash
+npm run build
+npm run start:prod
+```
+Recommended production settings:
+- Restrict **CORS** to trusted origins
+- Add `helmet` and HTTP compression
+- Run under a process manager (PM2/systemd/Docker) with health checks
+- Use MongoDB Atlas (backups, monitoring)
 
 ---
 
-## REST API Overview
+## API Overview
 
-> Base: `http://localhost:<PORT>`
+This backend exposes **REST** controllers for core resources and **GraphQL** for typed queries/aggregations.
 
-### Brands
-- `POST /brands/create`
-- `PATCH /brands/update/:id`
-- `DELETE /brands/delete/:id`
-- `GET /brands`
+### Authentication
+- Sign‑up / Sign‑in with access/refresh tokens
+- Token refresh, change/reset password, OTP flows (email‑based)
+- Role‑based guards (`admin`, `user`)
 
-### Categories
-- `POST /categories/create`
-- `PATCH /categories/update/:id`
-- `DELETE /categories/delete/:id`
-- `GET /categories`
+### Catalog
+- **Brands**, **Categories**, **Sub‑Categories**, **Products**
+- Create/Update/Delete, list with filtering/sorting
+- Media uploads via Multer → Cloudinary
 
-### Sub-Categories
-- `POST /subCategories/create`
-- `PATCH /subCategories/update/:id`
-- `DELETE /subCategories/delete/:id`
-- `GET /subCategories`
-
-### Products
-- `POST /products/create`
-- `PATCH /products/update/:productId`
-- `DELETE /products/delete/:id`
-- `GET /products`
-
-### Users
-- `POST /users/signUp`
-- `PATCH /users/confirmEmail`
-- `POST /users/signIn`
-- `GET /users/profile`
-
-### Carts
-- `POST /carts/add`
-- `PATCH /carts/remove`
-- `PATCH /carts/update`
-
-### Coupons
-- `POST /coupons/create`
-- `PATCH /coupons/update/:id`
-- `DELETE /coupons/delete/:id`
+### Cart & Checkout
+- Add/remove/update cart items
+- Apply coupons and compute totals
 
 ### Orders
-- `POST /orders/create`
-- `POST /orders/payment`
-- `POST /orders/webhook`
-- `GET /orders/success`
-- `GET /orders/cancel`
-- `PATCH /orders/cancel`
+- Create orders from cart, update status, list user orders
+- Email notifications and optional Stripe charge flow
 
----
+### GraphQL
+- Endpoint: `POST /graphql` (dev playground as configured)
+- Generated schema at the repo root: `schema.gql`
+- Example resolvers and types provided (orders domain)
 
-## GraphQL
+### Pagination
+Common query params: `page`, `limit`, `sort`  
+Typical response:
+```json
+{
+  "items": [/* documents */],
+  "total": 123,
+  "page": 2,
+  "pages": 13
+}
+```
 
-- Endpoint: `POST /graphql`
-- Resolvers: orders (auto-generated schema present: `schema.gql`, `srschema.gql`)
-- Example query (illustrative):
-```graphql
-query {
-  orders {
-    id
-    total
-    status
-    userId
-    items { productId quantity price }
-  }
+### Error Format
+Unified JSON shape for errors:
+```json
+{
+  "status": "error",
+  "message": "Human‑readable message",
+  "code": "OPTIONAL_ERROR_CODE",
+  "details": {}
 }
 ```
 
 ---
 
-## Uploads & Payments
-
-- **Uploads:** Multer + Cloudinary. Configure `CLOUDINARY_*` variables when enabling uploads.
-- **Payments:** Stripe secret key via `STRIPE_SECRET_KEY`. Webhook receiver at `/orders/webhook`.
-
----
-
-## Testing & Tooling
-
-- **Testing:** Jest (unit/e2e). Sample e2e spec in `test/app.e2e-spec.ts`.
-- **Code Quality:** ESLint + Prettier.
-- **CLI:** `nest-cli.json` uses `src` as `sourceRoot`.
-- **Postman:** `Ecommerce.postman_collection.json` at the root.
+## Security & Hardening
+- **CORS**: allow‑list trusted origins in production
+- **Rate Limiting**: tighten limits on auth/upload endpoints
+- **JWT**: separate secrets for access/refresh; enforce expirations; rotation strategy
+- **Uploads**: validate MIME types; organize Cloudinary folders per entity/user
+- **Indexes**: ensure email uniqueness; add useful indexes (createdAt, FKs)
 
 ---
 
-## Contributing
+## Conventions
+- **Code Style**: ESLint + Prettier
+- **Commits**: Conventional Commits (`feat:`, `fix:`, `docs:`, …)
+- **HTTP**: resource‑oriented routes; use `PATCH` for partial updates
+- **Validation**: DTOs/pipes for input validation
 
-1. Fork the repo and create a feature branch: `git checkout -b feat/your-feature`
-2. Run lint & tests locally: `npm run lint && npm test`
-3. Open a Pull Request with a clear description.
+---
+
+## Testing
+The repo includes a Nest E2E scaffold under `test/`. Suggested additions:
+- Unit tests for services/guards
+- Integration tests for auth → catalog → cart → orders
+
+```bash
+npm run test
+npm run test:e2e
+```
+
+---
+
+## Troubleshooting
+- **MongoDB**: verify `DB_URL` and Atlas IP allow‑list
+- **JWT**: confirm prefixes/expiry/secrets; clear invalid tokens
+- **Uploads**: check Cloudinary credentials and multer limits
+- **Emails**: use an SMTP provider or Gmail App Password
+- **GraphQL**: ensure schema is generated and module enabled
+
+---
+
+## Roadmap
+- [ ] Product reviews & ratings
+- [ ] Inventory & stock reservations
+- [ ] Admin dashboards & reports
+- [ ] Realtime notifications (orders/cart)
+- [ ] Full test coverage & load testing
+
+---
+
+## CI
+Add a GitHub Actions workflow that runs:
+- `npm ci`
+- build (optional)
+- lint
+- unit & e2e tests
+
+Trigger on `push` and `pull_request` to `main`.
 
 ---
 
 ## License
-
 Released under the **MIT License**. See [LICENSE](LICENSE) for details.
